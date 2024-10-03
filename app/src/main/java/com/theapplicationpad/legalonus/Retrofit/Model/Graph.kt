@@ -1,8 +1,12 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
+
+import com.google.gson.annotations.SerializedName
 
 data class Graph(
-    val @id: String,
-    val @type: String,
+    @SerializedName("@id")
+    val id: String,
+    @SerializedName("@type")
+    val type: String,
     val articleSection: List<String>,
     val author: AuthorX,
     val breadcrumb: Breadcrumb,

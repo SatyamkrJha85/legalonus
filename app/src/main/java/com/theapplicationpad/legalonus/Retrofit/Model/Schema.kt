@@ -1,6 +1,10 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
+
+import com.google.gson.annotations.SerializedName
 
 data class Schema(
-    val @context: String,
-    val @graph: List<Graph>
+    @SerializedName("@context")
+    val context: String,
+    @SerializedName("@graph")
+    val graph: List<Graph>
 )

@@ -1,9 +1,14 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
+
+import com.google.gson.annotations.SerializedName
 
 data class Robots(
     val follow: String,
     val index: String,
-    val max-image-preview: String,
-    val max-snippet: String,
-    val max-video-preview: String
+    @SerializedName("max-image-preview")
+    val maxImagePreview: String,
+    @SerializedName("max-snippet")
+    val maxSnippet: String,
+    @SerializedName("max-video-preview")
+    val maxVideoPreview: String
 )

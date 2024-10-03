@@ -1,17 +1,20 @@
 package com.theapplicationpad.legalonus.Retrofit
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.theapplicationpad.legalonus.Retrofit.Model.ListModel
+import com.example.testjson.model.MyModelList
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 
 import kotlinx.coroutines.launch
 
 class FetchLIstViewModel : ViewModel() {
 
-    private val _resultList = MutableLiveData<PostFetchResponse<ListModel>>()
-    val result: LiveData<PostFetchResponse<ListModel>> = _resultList
+    private val _resultList = MutableLiveData<PostFetchResponse<MyModelList>>()
+    val result: LiveData<PostFetchResponse<MyModelList>> = _resultList
 
     init {
         postList() // Trigger network call
@@ -20,22 +23,25 @@ class FetchLIstViewModel : ViewModel() {
     private val apiResponse = PostsResponse.postapi
 
     fun postList() {
+
         _resultList.value = PostFetchResponse.Loading
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
+            delay(1000)
             try {
                 val response = apiResponse.GetLawArticle()
                 if (response.isSuccessful) {
+                    Log.d("=======API Response", response.body().toString() ?: "No response")
                     response.body()?.let {
-                        _resultList.value = PostFetchResponse.Success(it)
+                        _resultList.postValue(PostFetchResponse.Success(it))
                     } ?: run {
-                        _resultList.value = PostFetchResponse.Error("Response body is null")
+                        _resultList.postValue(PostFetchResponse.Error("Response body is null"))
                     }
                 } else {
-                    _resultList.value = PostFetchResponse.Error("Failed with status code: ${response.code()}")
+                    _resultList.postValue(PostFetchResponse.Error("Failed with status code: ${response.code()}"))
                 }
             } catch (e: Exception) {
-                _resultList.value = PostFetchResponse.Error("Exception: ${e.message}")
+                _resultList.postValue(PostFetchResponse.Error("Exception: ${e.message}"))
             }
         }
     }
