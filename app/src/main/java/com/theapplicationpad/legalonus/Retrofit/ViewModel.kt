@@ -16,20 +16,20 @@ class FetchLIstViewModel : ViewModel() {
     private val _resultList = MutableLiveData<PostFetchResponse<MyModelList>>()
     val result: LiveData<PostFetchResponse<MyModelList>> = _resultList
 
-    init {
-        postList() // Trigger network call
-    }
+//    init {
+//        postList() // Trigger network call
+//    }
 
     private val apiResponse = PostsResponse.postapi
 
-    fun postList() {
+    fun postList(categoryid:String) {
 
         _resultList.value = PostFetchResponse.Loading
 
         viewModelScope.launch(Dispatchers.IO) {
             delay(1000)
             try {
-                val response = apiResponse.GetLawArticle()
+                val response = apiResponse.GetLawArticle(categoryid)
                 if (response.isSuccessful) {
                     Log.d("=======API Response", response.body().toString() ?: "No response")
                     response.body()?.let {

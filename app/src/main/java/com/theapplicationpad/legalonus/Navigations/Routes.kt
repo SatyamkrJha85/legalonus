@@ -34,6 +34,7 @@ sealed class Routes(val route:String){
     object LegalOnusLawJournal :Routes("LegalOnusLawJournal")
     object LegalOnusWebsite :Routes("LegalOnusWebsite")
     object ForLegalOnusLawJournal :Routes("ForLegalOnusLawJournal")
+    object ArticleDetails :Routes("ArticleDetails")
 
 
 }

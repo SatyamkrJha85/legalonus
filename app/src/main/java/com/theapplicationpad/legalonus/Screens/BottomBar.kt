@@ -47,6 +47,7 @@ import com.theapplicationpad.legalonus.DataClasses.drawerItems
 import com.theapplicationpad.legalonus.Navigations.Routes
 import com.theapplicationpad.legalonus.R
 import com.theapplicationpad.legalonus.Retrofit.FetchLIstViewModel
+import com.theapplicationpad.legalonus.Retrofit.PostFetchResponse
 import com.theapplicationpad.legalonus.Screens.Component.MyBottomBar
 import com.theapplicationpad.legalonus.Screens.Component.NavigationDrawer
 import com.theapplicationpad.legalonus.Screens.Component.TopHeader
@@ -152,6 +153,20 @@ fun BottomBar(modifier: Modifier = Modifier,chatViewModel: ChatViewModel,lIstVie
 
                 composable(Routes.LegalOnusLawJournal.route) {
                     LawGeneral()
+                }
+
+                composable(Routes.ArticleDetails.route + "/{articleId}") { backStackEntry ->
+                    val articleId = backStackEntry.arguments?.getString("articleId")?.toIntOrNull()
+                    val specificarticla = lIstViewModel.result.value?.let {
+                        (it as PostFetchResponse.Success).data.find {
+                            (it.id == articleId)
+                        }
+                    }
+                        specificarticla?.let {
+                            // Pass articleId to the detail screen
+                            ArticleDetailsScreen(navController = navController, article = it )
+                        }
+
                 }
 
 
