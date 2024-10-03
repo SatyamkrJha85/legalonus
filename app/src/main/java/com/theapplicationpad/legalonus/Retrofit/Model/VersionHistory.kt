@@ -1,4 +1,4 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
 
 data class VersionHistory(
     val count: Int,

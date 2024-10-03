@@ -1,17 +1,29 @@
 package com.theapplicationpad.legalonus.Retrofit
 
+import com.example.testjson.model.OgImage
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object PostsResponse{
     private val PostUrl ="https://legalonus.com/"
 
-   private fun getreponse():Retrofit{
-        return Retrofit.Builder()
+
+    val gson = GsonBuilder()
+        .registerTypeAdapter(
+            object : TypeToken<List<String>>() {}.type, TargetDeserializer()
+        )
+        .create()
+
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
             .baseUrl(PostUrl)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 
-    val postapi:LawArticlaApi= getreponse().create(LawArticlaApi::class.java)
+    val postapi: LawArticlaApi by lazy {
+        retrofit.create(LawArticlaApi::class.java)
+    }
 }

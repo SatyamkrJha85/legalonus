@@ -1,6 +1,10 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
+
+import com.google.gson.annotations.SerializedName
 
 data class TwitterMisc(
-    val Est. reading time: String,
-    val Written by: String
+    @SerializedName("@Est. reading time")
+    val EstReadingTime: String,
+    @SerializedName("@Written by")
+    val WrittenBy: String
 )

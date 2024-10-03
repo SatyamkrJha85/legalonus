@@ -1,8 +1,12 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
+
+import com.google.gson.annotations.SerializedName
 
 data class PotentialAction(
-    val @type: String,
+    @SerializedName("@type")
+    val type: String,
     val name: String,
-    val query-input: QueryInput,
-    val target: List<String>
+    @SerializedName("@query-input")
+    val queryInput: QueryInput/*,
+    val target: List<String>*/
 )

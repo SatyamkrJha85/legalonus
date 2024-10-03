@@ -1,7 +1,9 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
+
+import com.google.gson.annotations.SerializedName
 
 data class AuthorX(
-    @Seri
-    val @id: String,
+    @SerializedName("@id")
+    val id: String,
     val name: String
 )

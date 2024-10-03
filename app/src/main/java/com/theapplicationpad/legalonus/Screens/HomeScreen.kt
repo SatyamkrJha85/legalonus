@@ -1,12 +1,14 @@
 package com.theapplicationpad.legalonus.Screens
 
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,6 +23,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -33,6 +37,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.testjson.model.ItemElement
+import com.example.testjson.model.MyModelList
+import com.example.testjson.model.MyModelListItem
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.theapplicationpad.legalonus.DataClasses.HeaderItems
 import com.theapplicationpad.legalonus.Navigations.Routes
@@ -131,12 +138,12 @@ fun PostResult(modifier: Modifier = Modifier,fetchLIstViewModel: FetchLIstViewMo
         }
         is PostFetchResponse.Success -> {
 
-            LazyColumn {
-                item {
-                    Text(text = result.data.toString())
+//            LazyColumn {
+//                item {
+                    ArticleList(result.data)
 
-                }
-            }
+          //      }
+        //    }
         }
         null -> {
             
@@ -144,4 +151,43 @@ fun PostResult(modifier: Modifier = Modifier,fetchLIstViewModel: FetchLIstViewMo
     }
 }
 
+@Composable
+fun ArticleList(articleList: MyModelList) {
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        Log.d("Start","Start")
+        items(articleList) { article ->
+
+            ArticleItem(article = article)
+        }
+    }
+}
+
+@Composable
+fun ArticleItem(article: MyModelListItem) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp)) {
+
+        // Title
+        Text(text = article.title.rendered, style = MaterialTheme.typography.headlineMedium)
+//        Text(text = article.author.toString(), style = MaterialTheme.typography.headlineMedium)
+        Text(text = article.date, style = MaterialTheme.typography.headlineMedium)
+      //  Text(text = article.content.rendered, style = MaterialTheme.typography.headlineMedium)
+
+
+
+        // Author
+//        Text(text = "Author ID: ${article.author}", style = MaterialTheme.typography.labelSmall)
+//
+//        // Date
+//        Text(text = "Published on: ${article.date}", style = MaterialTheme.typography.bodyMedium)
+//
+//        // Meta data (as an example of showing one meta field)
+//        Text(text = "Reading Time: ${article.meta._editorskit_reading_time} mins", style = MaterialTheme.typography.bodyMedium)
+//
+//        Spacer(modifier = Modifier.height(8.dp))
+
+        Divider()
+    }
+}
 

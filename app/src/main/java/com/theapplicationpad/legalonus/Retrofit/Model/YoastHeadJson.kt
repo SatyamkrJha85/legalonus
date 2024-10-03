@@ -1,4 +1,4 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
 
 data class YoastHeadJson(
     val article_modified_time: String,

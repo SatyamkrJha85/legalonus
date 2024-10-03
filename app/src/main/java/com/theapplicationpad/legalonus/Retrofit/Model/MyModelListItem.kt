@@ -1,6 +1,6 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
 
-data class ListModelItem(
+data class MyModelListItem(
     val _links: Links,
     val author: Int,
     val categories: List<Int>,
