@@ -1,4 +1,4 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
 
 data class Meta(
     val _editorskit_block_options_position: String,

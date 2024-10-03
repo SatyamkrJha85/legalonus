@@ -1,7 +1,10 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
+
+import com.google.gson.annotations.SerializedName
 
 data class ItemElement(
-    val @type: String,
+    @SerializedName("@type")
+    val type: String,
     val item: String,
     val name: String,
     val position: Int

@@ -1,8 +1,12 @@
-package com.theapplicationpad.legalonus.Retrofit.Model
+package com.example.testjson.model
+
+import com.google.gson.annotations.SerializedName
 
 data class Image(
-    val @id: String,
-    val @type: String,
+    @SerializedName("@id")
+    val id: String,
+    @SerializedName("@type")
+    val type: String,
     val caption: String,
     val contentUrl: String,
     val inLanguage: String,
